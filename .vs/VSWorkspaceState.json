@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components",
+    "\\src\\app\\components\\admin-login",
+    "\\src\\app\\components\\book-flight",
+    "\\src\\app\\components\\booking-history",
+    "\\src\\app\\components\\flight",
+    "\\src\\app\\components\\landing-page"
+  ],
+  "SelectedNode": "\\src\\app\\components\\flight\\flight.component.ts",
+  "PreviewInSolutionExplorer": false
+}

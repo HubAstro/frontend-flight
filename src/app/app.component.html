@@ -1,0 +1,9 @@
+<!-- app.component.html -->
+<body>
+<div>
+    <!-- Show the navbar only for customer-related routes -->
+    <app-customer-dashboard *ngIf="isCustomerRoute()"></app-customer-dashboard> 
+    <!-- Routed components will be displayed here -->
+    <router-outlet></router-outlet>
+</div>
+</body>

@@ -1,0 +1,96 @@
+input:focus {
+    border-color: white;
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.5);
+    background-color: white;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #1976D2;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.form-group label {
+  color: white;
+}
+.login-container {
+  background-color: #1976D2;
+  padding: 40px 40px;
+  border-radius: 10px;
+  border: 2px solid rgba(192, 192, 192, 0.74);
+  box-shadow: 0px 0px 20px 6px rgba(70, 70, 70, 0.279);
+  text-align: left;
+  backdrop-filter: blur(30px);
+  width: 420px;
+}
+.login-container h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+.form-control {
+  position: relative;
+  margin-top: 3px;
+  margin-bottom: 20px;
+}
+.form-control {
+  width: 100%;
+  padding: 13px 40px;
+  border-radius: 70px;
+  border: none;
+  background-color: #ffffff;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: white;
+  border: none;
+  border-radius: 70px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #000000;
+  color: white;
+}
+p {
+  color: white;
+}
+p a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+p a:hover {
+  text-decoration: underline;
+}
+.backToLogin {
+  color: white;
+  padding-top: 20px;
+  position: relative;
+  text-decoration: none;
+}
+.backToLogin:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.error {
+  color: rgb(248, 2, 2);
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .login-container {
+    width: 90%;
+    padding: 10px;
+  }
+}
+
