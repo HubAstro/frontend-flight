@@ -14,15 +14,22 @@ export class CarrierService {
   private getHeaders(): HttpHeaders {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     const admin = localStorage.getItem('currentAdmin');
+    const user = localStorage.getItem('currentUser');
+    const jwtToken = localStorage.getItem('auth_token');
+    let jwt = '';
     if (admin) {
       try {
-        const { jwt } = JSON.parse(admin);
-        if (jwt) {
-          headers = headers.set('Authorization', `Bearer ${jwt}`);
-        }
-      } catch (e) {
-        console.error('Error parsing currentAdmin:', e);
-      }
+        jwt = JSON.parse(admin).jwt;
+      } catch {}
+    } else if (user) {
+      try {
+        jwt = JSON.parse(user).jwt;
+      } catch {}
+    } else if (jwtToken) {
+      jwt = jwtToken;
+    }
+    if (jwt) {
+      headers = headers.set('Authorization', `Bearer ${jwt}`);
     }
     return headers;
   }

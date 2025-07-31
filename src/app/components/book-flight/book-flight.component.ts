@@ -64,12 +64,8 @@ export class BookFlightComponent implements OnInit {
 
   // Book the flight
   bookFlight(): void {
-    this.calculateBookingAmount(); // Calculate booking amount based on selected class and travelers
-
-    // Ensure dateOfTravel is in yyyy-MM-dd format
+    this.calculateBookingAmount();
     const formattedDate = new Date(this.dateOfTravel).toISOString().split('T')[0];
-
-    // Only send required fields
     const booking: any = {
       customerName: this.customerName,
       flightId: this.flight.flightID,
@@ -78,14 +74,14 @@ export class BookFlightComponent implements OnInit {
       dateOfTravel: formattedDate,
       bookingAmount: this.bookingAmount,
     };
-
     this.bookingService.createBooking(booking).subscribe(
       (response) => {
-        console.log('Booking successful:', response);
         alert('Flight booked successfully!');
+        // Refresh flight details to update seat count
+        this.getFlightDetails(this.flight.flightID);
+        // Optionally, navigate to booking history or refresh it if on that page
       },
       (error) => {
-        console.error('Error booking flight:', error);
         alert('Failed to book the flight. Please try again.');
       }
     );

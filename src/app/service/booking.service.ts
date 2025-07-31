@@ -14,16 +14,23 @@ export class BookingService {
 
   private getHeaders(): { headers: HttpHeaders } {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const user = localStorage.getItem('currentAdmin');
-    if (user) {
+    const admin = localStorage.getItem('currentAdmin');
+    const user = localStorage.getItem('currentUser');
+    const jwtToken = localStorage.getItem('auth_token');
+    let jwt = '';
+    if (admin) {
       try {
-        const { jwt } = JSON.parse(user);
-        if (jwt) {
-          headers = headers.set('Authorization', `Bearer ${jwt}`);
-        }
-      } catch (e) {
-        console.error('Error parsing currentAdmin:', e);
-      }
+        jwt = JSON.parse(admin).jwt;
+      } catch {}
+    } else if (user) {
+      try {
+        jwt = JSON.parse(user).jwt;
+      } catch {}
+    } else if (jwtToken) {
+      jwt = jwtToken;
+    }
+    if (jwt) {
+      headers = headers.set('Authorization', `Bearer ${jwt}`);
     }
     return { headers };
   }
@@ -35,10 +42,10 @@ export class BookingService {
   }
 
   getAllBookings(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(this.apiUrl);
+    return this.http.get<Booking[]>(this.apiUrl, this.getHeaders());
   }
 
   deleteBooking(bookingId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${bookingId}`) ; 
+    return this.http.delete<void>(`${this.apiUrl}/${bookingId}`, this.getHeaders());
   }
 }
