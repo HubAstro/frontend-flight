@@ -17,14 +17,14 @@ const routes: Routes = [
   { path: 'customer-registration', component: RegistrationComponent },
   { path: 'customer-login', component: CustomerLoginComponent },
   { path: 'admin-login', component: AdminLoginComponent },
-  { path: 'customer-dashboard', component: CustomerDashboardComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent }, 
-  { path: 'add-flight', component: FlightComponent },
-  { path: 'search-flights', component: FlightSearchComponent },
-  { path: 'book-flight', component: BookFlightComponent },
-  { path: 'booking-history', component: BookingHistoryComponent } ,
-  { path: 'customer-dashboard', component: CustomerDashboardComponent, canActivate: [AuthGuard] } ,
-  { path: '', redirectTo: '/search-flights', pathMatch: 'full' } 
+  // Protected routes below
+  { path: 'customer-dashboard', component: CustomerDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'add-flight', component: FlightComponent, canActivate: [AuthGuard] },
+  { path: 'search-flights', component: FlightSearchComponent, canActivate: [AuthGuard] },
+  { path: 'book-flight', component: BookFlightComponent, canActivate: [AuthGuard] },
+  { path: 'booking-history', component: BookingHistoryComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/customer-login', pathMatch: 'full' }
 
 ];
 

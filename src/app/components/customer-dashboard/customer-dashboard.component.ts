@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Import Router service
+import { LoginService } from 'src/app/service/login.service'; // <-- Import LoginService
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -7,8 +7,11 @@ import { Router } from '@angular/router'; // Import Router service
   styleUrls: ['./customer-dashboard.component.css']
 })
 export class CustomerDashboardComponent {
-  constructor(private router: Router) { }
+  // Inject LoginService
+  constructor(private loginService: LoginService) { }
+
+  // This method now calls the service to perform a full logout
   logout(): void {
-    this.router.navigate(['/']);  
+    this.loginService.logout();  
   }
 }

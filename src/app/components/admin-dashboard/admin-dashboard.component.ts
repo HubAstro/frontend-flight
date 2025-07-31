@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { CarrierService } from 'src/app/service/Carrier.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/service/login.service'; // <-- Import LoginService
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
 })
-
 export class AdminDashboardComponent {
-
+  // ... all your existing properties for the form ...
   carrierName!: string;
   discountThirtyDays!: number;
   discountSixtyDays!: number;
@@ -23,19 +23,25 @@ export class AdminDashboardComponent {
   goldDiscount!: number;
   platinumDiscount!: number;
   carrierId!: number;
-
   addCarrierMessage: string | null = null;
   deleteCarrierMessage: string | null = null;
   isSuccess: boolean = false;
   isDeleteSuccess: boolean = false;
-
-  //
   private deleteSubscription: Subscription = new Subscription();
 
-  constructor(private carrierService: CarrierService , 
-    private router: Router
+  // Inject LoginService along with the other services
+  constructor(
+    private carrierService: CarrierService, 
+    private router: Router,
+    private loginService: LoginService // <-- Inject LoginService
   ) {}
 
+  // This method now calls the service to perform a full logout
+  logout(): void {
+    this.loginService.logout();
+  }
+
+  // ... all your other existing methods remain unchanged ...
   submitCarrier() {
     const carrierData = {
       carrierID: this.carrierId,
@@ -77,10 +83,6 @@ export class AdminDashboardComponent {
         }
       );
     }
-  }
-
-  logout(): void {
-    this.router.navigate(['/']);  
   }
   
   submitUpdateDelete() {
@@ -139,6 +141,7 @@ export class AdminDashboardComponent {
   }
 
   goToAddFlightPage() {
-    this.router.navigate(['/add-flight']);  // Replace with the correct route for the flight page
+    this.router.navigate(['/add-flight']);
   }
 }
+
